@@ -5,6 +5,11 @@
         </h1>
         <div class="post__meta">
             <span class="post__time">{{ page.date | date(format="%F") }}</span>
+            {% if page.extra.issue_url %}
+                <span class="post__source">
+                    <a href="{{ page.extra.issue_url }}">read the source issue</a>
+                </span>
+            {% endif %}
             {% if page.category %}
                 <div class="post__category">
                     <a href="{{ get_taxonomy_url(kind="category", name=page.category) }}">{{ page.category }}</a>

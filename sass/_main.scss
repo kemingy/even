@@ -147,6 +147,27 @@ main {
     &__summary {
       margin-bottom: 1rem;
     }
+
+    &__source {
+      padding: 0 12px;
+    }
+  }
+
+  .post-reactions {
+    display: flex;
+    margin: 1rem 0;
+
+    .reaction-emoji {
+      display: inline-block;
+      border: 1px solid #cacaca;
+      border-radius: 1rem;
+      margin: 0 4px;
+      padding: 2px 8px;
+    }
+    .reaction-emoji-count {
+      display: inline-block;
+      color: #666;
+    }
   }
 
   .post-comments {
@@ -154,6 +175,7 @@ main {
     border-image: linear-gradient(to right, #f0f0f0, #cccccc, #f0f0f0);
     border-image-slice: 1;
     margin: 2rem 0;
+    overflow: scroll;
 
     .comment-item {
       display: flex;

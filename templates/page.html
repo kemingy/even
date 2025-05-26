@@ -33,6 +33,22 @@
 
 <article class="post">
     {{ post_macros::title(page=page) }}
+
+    <div class="post-reactions">
+        {% set emoji_names = ["thumbs_up", "thumbs_down", "laugh", "heart", "hooray", "confused", "rocket", "eyes"] %}
+        {% set emojis = ["👍", "👎", "😄", "❤️", "🙌", "😕", "🚀", "👀"] %}
+        {% for emoji in emoji_names %}
+            {% if page.extra.reactions[emoji] > 0 %}
+            <span class="reaction-emoji">
+                {{ emojis[loop.index0] }}
+                {% if page.extra.reactions[emoji] > 1 %}
+                <span class="reaction-emoji-count">{{ page.extra.reactions[emoji] }}</span>
+                {% endif %}
+            </span>
+            {% endif %}
+        {% endfor %}
+    </div>
+
     <div class="post-content">
       {{ page.content | safe }}
     </div>
