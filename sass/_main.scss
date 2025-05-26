@@ -149,6 +149,39 @@ main {
     }
   }
 
+  .post-comments {
+    border-top: 1px solid transparent;
+    border-image: linear-gradient(to right, #f0f0f0, #cccccc, #f0f0f0);
+    border-image-slice: 1;
+    margin: 2rem 0;
+
+    .comment-item {
+      display: flex;
+      margin: 2rem 1rem;
+    }
+
+    .comment-content {
+      border: thin outset;
+      border-radius: 4px;
+      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+      margin: 0 1rem;
+      padding: 0 1rem;
+    }
+
+    .comment-author {
+      img {
+        width: 64px;
+        display: block;
+      }
+    }
+
+    .comment-date {
+      color: gray;
+      font-size: 12px;
+      display: block;
+    }
+  }
+
   .post-footer {
     margin-top: 20px;
     border-top: 1px solid #e6e6e6;

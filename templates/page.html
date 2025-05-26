@@ -38,6 +38,26 @@
     </div>
 
     {% block page_before_footer %}
+
+    {% if page.extra.comments %}
+        <div class="post-comments">
+            {% for comment in page.extra.comments %}
+                <div class="comment-item">
+                    <div class="comment-author">
+                        <a href="{{ comment.url }}">
+                            <img src="{{ comment.author_avatar }}" alt="avatar">
+                            <span class="comment-author-name">{{ comment.author_name }}</span>
+                            <span class="comment-date">{{ comment.updated_at | date(format="%Y-%m-%d %H:%M") }}</span>
+                        </a>
+                    </div>
+                    <div class="comment-content">
+                        {{ comment.content | markdown | safe }}
+                    </div>
+                </div>
+            {% endfor %}
+        </div>
+    {% endif %}
+
     {% endblock page_before_footer %}
 
     <div class="post-footer">

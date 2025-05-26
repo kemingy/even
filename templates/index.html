@@ -57,7 +57,7 @@
 
             <div id="mobile-navbar" class="mobile-navbar">
               <div class="mobile-header-logo">
-                <a href="{{ config.base_url }}" class="logo">{{ config.extra.even_title }}</a>
+                <a href="{{ config.base_url }}" class="logo">{{ config.title }}</a>
               </div>
               <div class="mobile-navbar-icon icon-out">
                 <span></span>
@@ -79,7 +79,7 @@
             </nav>
 
             <header id="header">
-                <div class="logo"><a href="{{ config.base_url }}">{{ config.extra.even_title }}</a></div>
+                <div class="logo"><a href="{{ config.base_url }}">{{ config.title }}</a></div>
                 <nav class="menu">
                     <ul>
                         {% for item in config.extra.even_menu %}
