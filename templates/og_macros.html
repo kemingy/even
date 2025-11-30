@@ -14,10 +14,8 @@
     {%- set og_permalink = page.permalink | default(value=current_url) -%}
     <meta property="og:url" content="{{ og_permalink | safe }}">
 {% endif -%}
-{%- if page.description -%}
-    {%- set og_summary = page.description | markdown(inline=true) | striptags -%}
-{% elif page.summary -%}
-    {%- set og_summary = page.summary | linebreaksbr | replace(from="<br>", to=" ") | striptags -%}
+{%- if page -%}
+    {%- set og_summary = page.description | default(value=page.summary | default(value=page.content | truncate(length=120))) | markdown(inline=true) | linebreaksbr | replace(from="<br>", to=" ") | striptags -%}
 {% else -%}
     {%- set og_summary = section.description | default(value=config.description | default(value="")) | markdown(inline=true) | striptags -%}
 {% endif -%}
