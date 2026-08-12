@@ -4,7 +4,7 @@ base_url = "/"
 compile_sass = true
 title = "Issue Blog"
 description = "A clean, responsive theme"
-generate_feed = true
+generate_feeds = true
 
 taxonomies = [
     {name = "categories", feed = true},
@@ -12,8 +12,9 @@ taxonomies = [
 ]
 
 [markdown]
-highlight_code = true
-highlight_theme = "css"
+github_alerts = true
+[markdown.highlighting]
+theme = "solarized-light"
 
 [extra]
 author = "Vincent"

@@ -1,5 +1,4 @@
 {% extends "index.html" %}
-{% import "post_macros.html" as post_macros %}
 
 {% block title %}{{config.title}} - {{page.title}}{% endblock title %}
 
@@ -32,13 +31,13 @@
 {% endif %}
 
 <article class="post">
-    {{ post_macros::title(page=page) }}
+    {{ <post_title page/> }}
 
     <div class="post-reactions">
         {% set emoji_names = ["thumbs_up", "thumbs_down", "laugh", "heart", "hooray", "confused", "rocket", "eyes"] %}
         {% set emojis = ["👍", "👎", "😄", "❤️", "🙌", "😕", "🚀", "👀"] %}
         {% for emoji in emoji_names %}
-            {% if page.extra.reactions[emoji] > 0 %}
+            {% if page.extra.reactions and page.extra.reactions[emoji] > 0 %}
             <span class="reaction-emoji">
                 {{ emojis[loop.index0] }}
                 {% if page.extra.reactions[emoji] > 1 %}
@@ -81,7 +80,7 @@
             {% if page.taxonomies.tags %}
                 <div class="post-tags">
                     {% for tag in page.taxonomies.tags %}
-                        <a href="{{ get_taxonomy_url(kind="tags", name=tag) }}">#{{ tag }}</a>
+                        <a href="{{ get_taxonomy_url(kind="tags", term=tag) }}">#{{ tag }}</a>
                     {% endfor %}
                 </div>
             {% endif %}
@@ -105,4 +104,3 @@
 </article>
 
 {% endblock content %}
-

@@ -1,8 +1,8 @@
-{% macro opengraph() %}
+{% component opengraph(config, current_path, page, section, current_url) %}
 {%- if current_path and current_path == "/" -%}
     <meta property="og:title" content="{{ config.title }}">
 {% elif current_path -%}
-    {%- set og_title = page.title | default(value=section.title | default(value=config.title)) -%}
+    {%- set og_title = page?.title | default(value=section?.title | default(value=config.title)) -%}
     <meta property="og:title" content="{{ og_title | safe }}">
 {% endif -%}
 {%- if page -%}
@@ -11,25 +11,27 @@
     <meta property="og:type" content="website">
 {% endif -%}
 {%- if current_url -%}
-    {%- set og_permalink = page.permalink | default(value=current_url) -%}
+    {%- set og_permalink = page?.permalink | default(value=current_url) -%}
     <meta property="og:url" content="{{ og_permalink | safe }}">
 {% endif -%}
 {%- if page -%}
-    {%- set og_summary = page.description | default(value=page.summary | default(value=page.content | truncate(length=120))) | markdown(inline=true) | linebreaksbr | replace(from="<br>", to=" ") | striptags -%}
+    {%- set og_summary = (page.description or page.summary or page.content or "") | truncate(length=120) | markdown(inline=true) | newlines_to_br | replace(from="<br>", to=" ") | striptags -%}
+{% elif section -%}
+    {%- set og_summary = (section.description or config.description or "") | markdown(inline=true) | striptags -%}
 {% else -%}
-    {%- set og_summary = section.description | default(value=config.description | default(value="")) | markdown(inline=true) | striptags -%}
+    {%- set og_summary = config.description | markdown(inline=true) | striptags -%}
 {% endif -%}
 <meta property="og:description" content="{{ og_summary }}">
 <meta property="og:site_name" content="{{ config.title }}">
-{%- if page.date -%}
-    <meta property="article:published_time" content="{{ page.date | date(format='%+') }}">
+{%- if page and page.date -%}
+    <meta property="article:published_time" content="{{ page.date }}">
 {%- endif -%}
-{%- if page.updated -%}
-    <meta property="article:modified_time" content="{{ page.updated | date(format='%+') }}">
+{%- if page and page.updated -%}
+    <meta property="article:modified_time" content="{{ page.updated }}">
 {%- endif -%}
-{%- if page.taxonomies and page.taxonomies.tags -%}
+{%- if page and page.taxonomies and page.taxonomies.tags -%}
     {%- for tag in page.taxonomies.tags -%}
         <meta property="article:tag" content="{{ tag }}">
     {%- endfor -%}
 {%- endif -%}
-{% endmacro %}
+{% endcomponent opengraph %}
